@@ -1,25 +1,39 @@
 name: .NET Tests
- on:
+
+on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ] jobs:
+    branches:
+      - main
+
+jobs:
   build-and-test:
     runs-on: ubuntu-latest
-  steps:
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
- with:
+        with:
           dotnet-version: '7.0.x'
+
       - name: Restore dependencies
         run: dotnet restore
+
       - name: Build
         run: dotnet build --no-restore
+
       - name: Run tests
-        run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" --results-directory
- TestResults
+        run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+
       - name: Publish Test Results
-        uses: dorny/test-reporter@v1 if: always() with:
-          name: NUnit Results path: 'TestResults/test-results.trx' reporter: dotnet-trx
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: NUnit Results
+          path: TestResults/test-results.trx
+          reporter: dotnet-trx
