@@ -8,11 +8,21 @@ namespace SauceDemo.Tests
     [TestFixture]
     public class LoginTests
     {
-        private IWebDriver driver;
+        private IWebDriver? driver;
+
 
         [SetUp]
         public void SetUp()
         {
+            var options = new ChromeOptions();
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--remote-debugging-port=9222"); // helps on GitHub Actions
+            options.AddArgument($"--user-data-dir=/tmp/profile-{Guid.NewGuid()}"); // unique per run
+
+            driver = new ChromeDriver(options);
+
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
@@ -30,7 +40,12 @@ namespace SauceDemo.Tests
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            if (driver != null)
+            {
+                driver.Quit();
+                driver.Dispose();
+            }
         }
+
     }
 }
