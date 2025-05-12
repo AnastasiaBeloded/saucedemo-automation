@@ -1,39 +1,26 @@
-name: .NET Tests on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ] jobs:
-  build-and-test:
-    runs-on: ubuntu-latest steps: - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3 with:
-        dotnet-version: '7.0.x'
-    - name: Restore dependencies
+name: .NET Testsname: .NET Tests on:
+  push: on:  branches: [ main ] push:  pull_request:
+    branches: [ main ] branches: [ main ] jobs:
+  pull_request:  build-and-test:
+    branches: [ main ] runs-on: ubuntu-latest steps: - name: Checkout code
+      uses: actions/checkout@v3 jobs:  - name: Setup .NET
+  build-and-test:  uses: actions/setup-dotnet@v3 with:
+    runs-on: ubuntu-latest dotnet-version: '7.0.x' - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Run tests
-      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
-    - name: Publish Test Results
-      uses: dorny/test-reporter@v1 if: always() with:
-        name: NUnit Results path: '**/test-results.trx' reporter: dotnet-trx name: .NET Tests on:
-  push:
-    branches: [ main ]
+    steps:  - name: Build - name: Checkout code run: dotnet build --no-restore - name: Run tests
+      uses: actions/checkout@v3 run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
+    - name: Publish Test Results - name: Setup .NET uses: dorny/test-reporter@v1 if: always() with:
+      uses: actions/setup-dotnet@v3 name: NUnit Results path: '**/test-results.trx' reporter: dotnet-trx name: .NET Tests on: with:  push:
+        dotnet-version: '7.0.x' branches: [ main ]
   pull_request:
-    branches: [ main ] jobs:
-  build-and-test:
-    runs-on: ubuntu-latest steps: - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3 with:
+    - name: Restore dependencies branches: [ main ] jobs:
+      run: dotnet restore build-and-test:
+    runs-on: ubuntu-latest steps: - name: Checkout code - name: Build uses: actions/checkout@v3 - name: Setup .NET
+      run: dotnet build --no-restore uses: actions/setup-dotnet@v3 with:
         dotnet-version: '7.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Run tests
-      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
-    - name: Publish Test Results
-      uses: dorny/test-reporter@v1 if: always() with:
-        name: NUnit Results path: '**/test-results.trx' reporter: dotnet-trx
+    - name: Run tests - name: Restore dependencies
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" --results-directory TestResults run: dotnet restore
+    - name: Build - name: Publish Test Results run: dotnet build --no-restore - name: Run tests
+      uses: dorny/test-reporter@v1 run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" if: always()  - name: Publish Test Results uses: dorny/test-reporter@v1 if: always() with: with:  
+      name: NUnit Results path: '**/test-results.trx' reporter: dotnet-trx
+        name: NUnit Results path: 'TestResults/test-results.trx' reporter: dotnet-trx
