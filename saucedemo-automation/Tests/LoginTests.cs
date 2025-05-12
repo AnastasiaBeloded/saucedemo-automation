@@ -16,12 +16,14 @@ namespace SauceDemo.Tests
         {
             var options = new ChromeOptions();
             options.AddArgument("--headless=new");
+            options.AddArgument("--disable-gpu");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
-            options.AddArgument("--remote-debugging-port=9222"); // helps on GitHub Actions
-            options.AddArgument($"--user-data-dir=/tmp/profile-{Guid.NewGuid()}"); // unique per run
+            options.AddArgument("--disable-extensions");
+            options.AddArgument("--window-size=1920,1080");
 
             driver = new ChromeDriver(options);
+
 
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
