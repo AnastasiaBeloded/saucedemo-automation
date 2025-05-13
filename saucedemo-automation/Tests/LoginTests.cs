@@ -14,11 +14,14 @@ namespace SauceDemo.Tests
         public void SetUp()
         {
             var options = new ChromeOptions();
-            //options.AddArgument("--headless=new");//work without UI
+            options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-gpu");
             options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--disable-extensions");
             options.AddArgument("--window-size=1920,1080");
+            options.AddArgument($"--user-data-dir=/tmp/chrome-profile-{Guid.NewGuid()}");
+
 
             driver = new ChromeDriver(options);
             driver.Manage().Window.Maximize();

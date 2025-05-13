@@ -21,6 +21,8 @@ namespace SauceDemo.Tests
             options.AddArgument("--disable-dev-shm-usage");
             options.AddArgument("--disable-extensions");
             options.AddArgument("--window-size=1920,1080");
+            options.AddArgument($"--user-data-dir=/tmp/chrome-profile-{Guid.NewGuid()}");
+
 
             driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl("https://www.saucedemo.com/");
