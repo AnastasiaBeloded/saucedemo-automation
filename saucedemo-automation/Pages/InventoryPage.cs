@@ -34,5 +34,34 @@ namespace SauceDemo.Pages
             var select = new OpenQA.Selenium.Support.UI.SelectElement(driver.FindElement(sortDropdown));
             select.SelectByText(visibleText);
         }
+        public void AddToCartByName(string productName)
+        {
+            var addButton = driver.FindElement(By.XPath($"//div[text()='{productName}']/ancestor::div[@class='inventory_item']//button"));
+            addButton.Click();
+        }
+
+        public void RemoveFromCartByName(string productName)
+        {
+            var removeButton = driver.FindElement(By.XPath($"//div[text()='{productName}']/ancestor::div[@class='inventory_item']//button[contains(text(),'Remove')]"));
+            removeButton.Click();
+        }
+
+        public string GetCartBadgeCount()
+        {
+            try
+            {
+                return driver.FindElement(By.ClassName("shopping_cart_badge")).Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return "0";
+            }
+        }
+
+        public void ClickCartIcon()
+        {
+            driver.FindElement(By.ClassName("shopping_cart_link")).Click();
+        }
+
     }
 }
