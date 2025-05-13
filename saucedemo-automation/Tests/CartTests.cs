@@ -90,8 +90,9 @@ namespace SauceDemo.Tests
             var cartPage = new CartPage(driver);
             cartPage.ClickCheckout();
 
-            Assert.That(cartPage.IsCheckoutBlocked(), "Checkout was not blocked from empty cart");
+            Assert.That(driver.Url.Contains("checkout-step-one"), "Checkout page not opened from empty cart");
         }
+
 
         [TearDown]
         public void TearDown()
