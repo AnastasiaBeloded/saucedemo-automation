@@ -19,6 +19,7 @@ namespace SauceDemo.Tests
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-gpu");
             options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--disable-extensions");
             options.AddArgument("--window-size=1920,1080");
 
             driver = new ChromeDriver(options);
@@ -27,6 +28,7 @@ namespace SauceDemo.Tests
             var loginPage = new LoginPage(driver);
             loginPage.Login("standard_user", "secret_sauce");
         }
+
 
         [Test]
         public void TC10_ViewProductList()
