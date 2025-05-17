@@ -86,6 +86,8 @@ namespace SauceDemo.Tests
         {
             var inventoryPage = new InventoryPage(driver);
             inventoryPage.ClickCartIcon();
+            Assert.That(driver.Url.Contains("cart"), "Not on cart page before clicking checkout");
+
 
             var cartPage = new CartPage(driver);
             cartPage.ClickCheckout();

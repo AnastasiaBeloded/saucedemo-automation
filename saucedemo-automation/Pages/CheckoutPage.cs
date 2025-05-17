@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace saucedemo_automation.Pages
 {
@@ -30,6 +31,13 @@ namespace saucedemo_automation.Pages
         {
             driver.FindElement(continueButton).Click();
         }
+        public void ClickCheckout()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var checkoutBtn = wait.Until(d => d.FindElement(By.Id("checkout")));
+            checkoutBtn.Click();
+        }
+
 
         public void ClickFinish()
         {
