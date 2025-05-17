@@ -30,9 +30,9 @@ This project includes end-to-end functional tests covering:
 ```
 
 ## 🧾 Test Documents
-- [📋 Test Plan (STP)](./SauceDemo_TestPlan.md)
-- [🧾 Test Design (STD)](./SauceDemo_TestDesign.md)
-- [✅ Test Cases List](./TestCases.md)
+- [📋 Test Plan (STP)](./docs/SauceDemo_TestPlan.md)
+- [🧾 Test Design (STD)](./docs/SauceDemo_TestDesign.md)
+- [✅ Test Cases List](./docs/TestCases.md)
 
 ## ▶️ Running Tests
 From the root directory:
