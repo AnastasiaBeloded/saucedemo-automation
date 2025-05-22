@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +51,9 @@ namespace SauceDemo.Pages
         {
             try
             {
-                return driver.FindElement(By.ClassName("shopping_cart_badge")).Text;
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                var badge = wait.Until(d => d.FindElement(By.ClassName("shopping_cart_badge")));
+                return badge.Text;
             }
             catch (NoSuchElementException)
             {

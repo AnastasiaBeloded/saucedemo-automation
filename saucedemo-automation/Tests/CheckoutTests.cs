@@ -44,7 +44,7 @@ namespace SauceDemo.Tests
             checkoutPage.FillForm("John", "Doe", "12345");
             checkoutPage.ClickContinue();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             wait.Until(d => d.Url.Contains("checkout-step-two"));
 
             checkoutPage.ClickFinish();

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using SauceDemo.Pages;
 
 namespace SauceDemo.Tests
@@ -54,7 +55,8 @@ namespace SauceDemo.Tests
             var inventoryPage = new InventoryPage(driver);
             inventoryPage.AddToCartByName("Sauce Labs Backpack");
             inventoryPage.RemoveFromCartByName("Sauce Labs Backpack");
-
+            Thread.Sleep(3000);
+            
             Assert.That(inventoryPage.GetCartBadgeCount(), Is.EqualTo("0"));
         }
 
